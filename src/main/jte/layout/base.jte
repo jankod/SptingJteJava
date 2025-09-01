@@ -1,7 +1,7 @@
 @import gg.jte.Content
 
 @param String title
-@param String activePath
+@param String activePathPage
 @param gg.jte.Content content
 @param Content headExtra = null
 @param Content scripts = null
@@ -14,9 +14,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>${title}</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/css/tabler.min.css"/>
 
     <!-- Slot za per-page HEAD (ako postoji) -->
     @if (headExtra != null)
@@ -25,16 +25,18 @@
 </head>
 <body class="bg-light">
 
-@template.components.navbar(activePath = activePath)
+@template.components.navbar(activePath = activePathPage)
 
 <main class="container py-4">
     ${content}
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-
+<%--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"--%>
+<%--        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"--%>
+<%--        crossorigin="anonymous"></script>--%>
+    <script
+            src="https://cdn.jsdelivr.net/npm/@tabler/core@1.4.0/dist/js/tabler.min.js">
+    </script>
 <!-- Slot za per-page SCRIPTS (ako postoji) -->
 @if (scripts != null)
     ${scripts}

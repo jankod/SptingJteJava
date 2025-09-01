@@ -1,9 +1,11 @@
 package hr.ja.st;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
 
+@Slf4j
 @SpringBootApplication(scanBasePackages = "hr.ja.st")
 public class App {
 
@@ -14,6 +16,7 @@ public class App {
         SpringApplication app = new SpringApplication(App.class);
         app.setApplicationStartup(new BufferingApplicationStartup(2048));
         app.run(args);
+        log.debug("url http://localhost:8080");
 
     }
 

@@ -1,6 +1,5 @@
-
-@template.layout.base(title = "Home",
-activePath = "/",
+@template.layout.base(title = "About",
+activePathPage = hr.ja.st.PageController.ABOUT,
 content = @`
     <div class="row">
         <div class="col-lg-8">
@@ -19,3 +18,4 @@ scripts = @`
     </script>
 `
 )
+

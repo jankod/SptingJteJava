@@ -9,18 +9,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class PageController {
 
     public static final String HOME = "/";
-    public static final String ABOUT = "/about";
 
     @GetMapping(HOME)
     public String home(Model model, HttpServletRequest req) {
         model.addAttribute("username", "Marko");
-        return "pages/home";
+        return "pages/home.jte";
     }
 
 
+    public static final String ABOUT = "/about";
+
     @GetMapping(ABOUT)
     public String showAbout() {
-        return "pages/about";
+        return "pages/about.jte";
     }
 
 }

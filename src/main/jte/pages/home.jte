@@ -1,7 +1,7 @@
 @param String username
 
 @template.layout.base(title = "Home",
-activePath = "/",
+activePathPage = hr.ja.st.PageController.HOME,
 content = @`
     <div class="row">
         <div class="col-lg-8">
