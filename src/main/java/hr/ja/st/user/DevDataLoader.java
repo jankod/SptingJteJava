@@ -24,11 +24,22 @@ public class DevDataLoader implements CommandLineRunner {
                     .username(username)
                     .password(passwordEncoder.encode("tajna"))
                     .enabled(true)
-                    .roles("ROLE_USER")
+                    .roles(new java.util.HashSet<>(java.util.List.of(Role.ROLE_USER)))
                     .build();
             userRepository.save(u);
             log.info("Kreiran demo korisnik: {} / {}", username, "tajna");
         }
+
+        String adminUsername = "admin";
+        if (userRepository.findByUsername(adminUsername).isEmpty()) {
+            User admin = User.builder()
+                    .username(adminUsername)
+                    .password(passwordEncoder.encode("admin"))
+                    .enabled(true)
+                    .roles(new java.util.HashSet<>(java.util.List.of(Role.ROLE_ADMIN, Role.ROLE_USER)))
+                    .build();
+            userRepository.save(admin);
+            log.info("Kreiran admin korisnik: {} / {}", adminUsername, "admin");
+        }
     }
 }
-

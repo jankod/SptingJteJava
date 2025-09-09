@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(name = "uk_users_username", columnNames = "username"))
@@ -26,8 +28,11 @@ public class User {
     @Column(nullable = false)
     private boolean enabled;
 
-    @Column(nullable = false, length = 128)
-    private String roles; // Comma separated, e.g. "ROLE_USER,ROLE_ADMIN"
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role", nullable = false, length = 32)
+    private Set<Role> roles = new HashSet<>();
 
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
@@ -35,8 +40,6 @@ public class User {
     @PrePersist
     void prePersist() {
         if (createdAt == null) createdAt = Instant.now();
-        // default
-        if (roles == null || roles.isBlank()) roles = "ROLE_USER";
+        if (roles == null || roles.isEmpty()) roles = new HashSet<>(java.util.List.of(Role.ROLE_USER));
     }
 }
-

@@ -43,6 +43,14 @@
             icon = @`@template.components.icons.users()`
             )
 
+            @if (org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication() != null && org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")))
+                @template.components.navItem(
+                label = "Users",
+                currentPath  = "/users",
+                activePath = activePath,
+                icon = @`@template.components.icons.users()`
+                )
+            @endif
 
 
             <li class="nav-item">
