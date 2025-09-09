@@ -12,7 +12,10 @@ csrfToken = csrfToken,
 content = @`
     <div class="row">
         <div class="col-12">
-            <h1 class="mb-3">Korisnici</h1>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <h1 class="m-0">Korisnici</h1>
+                <a class="btn btn-primary" href="/users/new">Dodaj korisnika</a>
+            </div>
             <div class="card">
                 <div class="table-responsive">
                     <table class="table table-vcenter">

@@ -24,6 +24,55 @@ public class UserController {
         return "pages/users.jte";
     }
 
+    @GetMapping("/new")
+    public String newUserForm(Model model) {
+        NewUserForm form = new NewUserForm();
+        form.getRoles().add(Role.ROLE_USER);
+        model.addAttribute("form", form);
+        model.addAttribute("allRoles", Role.values());
+        return "pages/user_new.jte";
+    }
+
+    @PostMapping
+    public String createUser(@ModelAttribute("form") @jakarta.validation.Valid NewUserForm form,
+                             org.springframework.validation.BindingResult binding,
+                             Model model) {
+        // Normalize input
+        if (form.getUsername() != null) {
+            form.setUsername(form.getUsername().trim());
+        }
+        // Username uniqueness
+        userRepository.findByUsername(form.getUsername()).ifPresent(u ->
+                binding.rejectValue("username", "exists", "Korisničko ime već postoji"));
+        // Passwords match
+        if (!binding.hasFieldErrors("password") && !form.getPassword().equals(form.getConfirmPassword())) {
+            binding.rejectValue("confirmPassword", "mismatch", "Lozinke se ne podudaraju");
+        }
+        // Roles default
+        if (form.getRoles() == null || form.getRoles().isEmpty()) {
+            form.getRoles().add(Role.ROLE_USER);
+        }
+
+        if (binding.hasErrors()) {
+            java.util.List<String> errors = new java.util.ArrayList<>();
+            for (org.springframework.validation.ObjectError e : binding.getAllErrors()) {
+                errors.add(e.getDefaultMessage());
+            }
+            model.addAttribute("errors", errors);
+            model.addAttribute("allRoles", Role.values());
+            return "pages/user_new.jte";
+        }
+
+        User user = User.builder()
+                .username(form.getUsername())
+                .enabled(form.isEnabled())
+                .roles(new java.util.HashSet<>(form.getRoles()))
+                .password(passwordEncoder.encode(form.getPassword()))
+                .build();
+        userRepository.save(user);
+        return "redirect:/users";
+    }
+
     @GetMapping("/{id}/edit")
     public String editForm(@PathVariable Long id, Model model) {
         User user = userRepository.findById(id).orElseThrow();
