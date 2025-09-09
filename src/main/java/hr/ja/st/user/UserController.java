@@ -50,7 +50,7 @@ public class UserController {
         }
         // Roles default
         if (form.getRoles() == null || form.getRoles().isEmpty()) {
-            form.getRoles().add(Role.ROLE_USER);
+            form.add(Role.ROLE_USER);
         }
 
         if (binding.hasErrors()) {

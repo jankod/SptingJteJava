@@ -23,5 +23,14 @@ public class NewUserForm {
 
     @NotBlank
     private String confirmPassword;
+
+    public void add(Role role) {
+        if (roles == null) {
+            roles = new ArrayList<>();
+        }
+        if (!roles.contains(role)) {
+            roles.add(role);
+        }
+    }
 }
 
