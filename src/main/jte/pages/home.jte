@@ -1,7 +1,11 @@
 @param String username
+@param String csrfParameterName = null
+@param String csrfToken = null
 
 @template.layout.base(title = "Home",
 activePathPage = hr.ja.st.PageController.HOME,
+csrfParameterName = csrfParameterName,
+csrfToken = csrfToken,
 content = @`
     <div class="row">
         <div class="col-lg-8">

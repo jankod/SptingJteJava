@@ -1,5 +1,6 @@
 package hr.ja.st;
 
+import jakarta.annotation.security.RolesAllowed;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,8 +12,11 @@ public class PageController {
     public static final String HOME = "/";
 
     @GetMapping(HOME)
+    // restrict only ROLE_USER can access via annotation
+    @RolesAllowed("ROLE_USER")
     public String home(Model model, HttpServletRequest req) {
-        model.addAttribute("username", "Marko");
+        String username = req.getUserPrincipal() != null ? req.getUserPrincipal().getName() : "Gost";
+        model.addAttribute("username", username);
         return "pages/home.jte";
     }
 
