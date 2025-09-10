@@ -30,19 +30,24 @@ public class DevToolsController {
             if (ideaCmd != null) {
                 if (line != null) {
                     proc = new ProcessBuilder(ideaCmd, "--line", String.valueOf(line), f.getAbsolutePath()).start();
+                    log.debug("proc={}", procToString(proc));
                 } else {
                     proc = new ProcessBuilder(ideaCmd, f.getAbsolutePath()).start();
+                    log.debug("proc={}", procToString(proc));
                 }
             } else if (isMac()) {
                 // Fallback macOS open
                 if (line != null) {
                     proc = new ProcessBuilder("open", "-na", "IntelliJ IDEA", "--args", "--line", String.valueOf(line), f.getAbsolutePath()).start();
+                    log.debug("proc={}", procToString(proc));
                 } else {
                     proc = new ProcessBuilder("open", "-a", "IntelliJ IDEA", f.getAbsolutePath()).start();
+                    log.debug("proc={}", procToString(proc));
                 }
             } else {
                 // Generic fallback
                 proc = new ProcessBuilder(f.getAbsolutePath()).start();
+                log.debug("proc={}", procToString(proc));
             }
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
         } catch (IOException e) {
@@ -51,15 +56,26 @@ public class DevToolsController {
         }
     }
 
-    private static boolean isMac() { return System.getProperty("os.name").toLowerCase().contains("mac"); }
+    private String procToString(Process proc) {
+        return proc.info().command().orElse("?") + " " +
+               proc.info().arguments().map(a -> String.join(" ", a)).orElse("?") + " " +
+               "pid=" + proc.pid() + " " +
+               "started=" + proc.info().startInstant().map(Object::toString).orElse("?") + " " +
+               "user=" + proc.info().user().orElse("?");
+    }
+
+    private static boolean isMac() {
+        return System.getProperty("os.name").toLowerCase().contains("mac");
+    }
 
     private static String findIdeaLauncher() {
-        String[] candidates = new String[] {"idea", "idea64.exe"};
+        String[] candidates = new String[]{"idea", "idea64.exe"};
         for (String c : candidates) {
             try {
                 Process p = new ProcessBuilder(c, "-h").start();
                 return c;
-            } catch (IOException ignored) {}
+            } catch (IOException ignored) {
+            }
         }
         return null;
     }
