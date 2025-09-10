@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-@Profile({"default", "dev"})
+@Profile("!test")
 public class DevDataLoader implements CommandLineRunner {
 
     private final UserRepository userRepository;
@@ -24,7 +24,7 @@ public class DevDataLoader implements CommandLineRunner {
                     .username(username)
                     .password(passwordEncoder.encode("tajna"))
                     .enabled(true)
-                    .roles(new java.util.HashSet<>(java.util.List.of(Role.ROLE_USER)))
+                    .roles(new java.util.HashSet<>(java.util.List.of(Roles.USER)))
                     .build();
             userRepository.save(u);
             log.info("Kreiran demo korisnik: {} / {}", username, "tajna");
@@ -36,7 +36,7 @@ public class DevDataLoader implements CommandLineRunner {
                     .username(adminUsername)
                     .password(passwordEncoder.encode("admin"))
                     .enabled(true)
-                    .roles(new java.util.HashSet<>(java.util.List.of(Role.ROLE_ADMIN, Role.ROLE_USER)))
+                    .roles(new java.util.HashSet<>(java.util.List.of(Roles.ADMIN, Roles.USER)))
                     .build();
             userRepository.save(admin);
             log.info("Kreiran admin korisnik: {} / {}", adminUsername, "admin");

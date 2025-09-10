@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.stream.Collectors;
 
-import hr.ja.st.user.Role;
+import hr.ja.st.user.Roles;
 @Slf4j
 public final class Formatters {
     private Formatters() {}
@@ -23,19 +23,16 @@ public final class Formatters {
         return f.format(instant);
     }
 
-    public static String rolesToLabel(Collection<Role> roles) {
+    public static String rolesToLabel(Collection<String> roles) {
         if (roles == null || roles.isEmpty()) return "";
         return roles.stream()
-                .sorted(Comparator.comparing(Enum::name))
+                .sorted()
                 .map(Formatters::roleLabel)
                 .collect(Collectors.joining(", "));
     }
 
-    public static String roleLabel(Role role) {
+    public static String roleLabel(String role) {
         if (role == null) return "";
-        return switch (role) {
-            case ROLE_ADMIN -> "Admin";
-            case ROLE_USER -> "User";
-        };
+        return Roles.label(role);
     }
 }

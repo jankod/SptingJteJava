@@ -7,6 +7,7 @@
 @param Content scripts = null
 @param String csrfParameterName = null
 @param String csrfToken = null
+@param boolean showNavbar = true
 
 
 <!DOCTYPE html>
@@ -27,7 +28,9 @@
 </head>
 <body class="bg-light">
 
-@template.components.navbar(activePath = activePathPage, csrfParameterName = csrfParameterName, csrfToken = csrfToken)
+@if (showNavbar)
+    @template.components.navbar(activePath = activePathPage, csrfParameterName = csrfParameterName, csrfToken = csrfToken)
+@endif
 
 <main class="container py-4">
     ${content}
@@ -42,6 +45,10 @@
 <!-- Slot za per-page SCRIPTS (ako postoji) -->
 @if (scripts != null)
     ${scripts}
+@endif
+
+@if (hr.ja.st.dev.DevToolbarConfig.ENABLED && hr.ja.st.dev.DebugContext.current() != null)
+    @template.components.devPanel(debug = hr.ja.st.dev.DebugContext.current())
 @endif
 </body>
 </html>

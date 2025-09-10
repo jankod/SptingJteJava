@@ -1,4 +1,5 @@
 @import hr.ja.st.PageController
+@import hr.ja.st.user.Roles
 
 @param String activePath
 @param String csrfParameterName = null
@@ -43,7 +44,7 @@
             icon = @`@template.components.icons.users()`
             )
 
-            @if (org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication() != null && org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN")))
+            @if (org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication() != null && org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().anyMatch(a -> a.getAuthority().equals(Roles.ADMIN)))
                 @template.components.navItem(
                 label = "Users",
                 currentPath  = "/users",

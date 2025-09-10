@@ -23,7 +23,6 @@ public class JpaUserDetailsService implements UserDetailsService {
                 .findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found: " + username));
         Collection<GrantedAuthority> authorities = user.getRoles().stream()
-                .map(Enum::name)
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
         return org.springframework.security.core.userdetails.User

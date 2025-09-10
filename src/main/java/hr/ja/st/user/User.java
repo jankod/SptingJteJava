@@ -30,9 +30,8 @@ public class User {
 
     @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"))
-    @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false, length = 32)
-    private Set<Role> roles = new HashSet<>();
+    private Set<String> roles = new HashSet<>();
 
     @Column(nullable = false, updatable = false)
     private Instant createdAt;
@@ -40,6 +39,6 @@ public class User {
     @PrePersist
     void prePersist() {
         if (createdAt == null) createdAt = Instant.now();
-        if (roles == null || roles.isEmpty()) roles = new HashSet<>(java.util.List.of(Role.ROLE_USER));
+        if (roles == null || roles.isEmpty()) roles = new HashSet<>(java.util.List.of(hr.ja.st.user.Roles.USER));
     }
 }

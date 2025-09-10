@@ -1,7 +1,7 @@
 @import hr.ja.st.user.User
-@import hr.ja.st.user.Role
 
 @param User user
+@param String[] allRoles
 @param String csrfParameterName = null
 @param String csrfToken = null
 
@@ -25,14 +25,12 @@ content = @`
 
                         <div class="mb-3">
                             <label class="form-label">Uloge</label>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="roleUser" name="roles" value="ROLE_USER" checked="${user.getRoles().contains(Role.ROLE_USER)}" />
-                                <label class="form-check-label" for="roleUser">User</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="roleAdmin" name="roles" value="ROLE_ADMIN" checked="${user.getRoles().contains(Role.ROLE_ADMIN)}" />
-                                <label class="form-check-label" for="roleAdmin">Admin</label>
-                            </div>
+                            @for (String r : allRoles)
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="role_${r}" name="roles" value="${r}" checked="${user.getRoles().contains(r)}" />
+                                    <label class="form-check-label" for="role_${r}">${hr.ja.st.view.Formatters.roleLabel(r)}</label>
+                                </div>
+                            @endfor
                         </div>
 
                         <div class="mb-3 form-check">

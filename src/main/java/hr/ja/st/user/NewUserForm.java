@@ -14,8 +14,8 @@ public class NewUserForm {
 
     private boolean enabled = true;
 
-    // roles selected in the form
-    private List<Role> roles = new ArrayList<>();
+    // roles selected in the form (authorities strings)
+    private List<String> roles = new ArrayList<>();
 
     @NotBlank
     @Size(min = 8, message = "Lozinka mora imati barem 8 znakova")
@@ -24,13 +24,12 @@ public class NewUserForm {
     @NotBlank
     private String confirmPassword;
 
-    public void add(Role role) {
+    public void add(String role) {
         if (roles == null) {
             roles = new ArrayList<>();
         }
-        if (!roles.contains(role)) {
+        if (role != null && !roles.contains(role)) {
             roles.add(role);
         }
     }
 }
-

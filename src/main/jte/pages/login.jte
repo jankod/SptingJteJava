@@ -7,9 +7,10 @@
 activePathPage = hr.ja.st.PageController.HOME,
 csrfParameterName = csrfParameterName,
 csrfToken = csrfToken,
+showNavbar = false,
 content = @`
     <div class="row justify-content-center">
-        <div class="col-md-6 col-lg-4">
+        <div class="col-md-6 col-lg-4 mt-5">
             <div class="card">
                 <div class="card-body">
                     <h2 class="card-title text-center mb-4">Prijava</h2>
@@ -27,14 +28,14 @@ content = @`
                     @endif
 
                     <form method="post" action="/login">
-                        <input type="hidden" name="${csrfParameterName}" value="${csrfToken}" />
+                        <input type="hidden" name="${csrfParameterName}" value="${csrfToken}"/>
                         <div class="mb-3">
                             <label class="form-label" for="username">Korisničko ime</label>
-                            <input class="form-control" id="username" name="username" type="text" required autofocus />
+                            <input class="form-control" id="username" name="username" type="text" required autofocus/>
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="password">Lozinka</label>
-                            <input class="form-control" id="password" name="password" type="password" required />
+                            <input class="form-control" id="password" name="password" type="password" required/>
                         </div>
                         <div class="mb-3 form-check">
                             <input class="form-check-input" type="checkbox" id="remember-me" name="remember-me"/>

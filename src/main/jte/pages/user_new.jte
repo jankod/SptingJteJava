@@ -1,8 +1,7 @@
 @import hr.ja.st.user.NewUserForm
-@import hr.ja.st.user.Role
 
 @param NewUserForm form
-@param Role[] allRoles
+@param String[] allRoles
 @param java.util.List<String> errors = null
 @param String csrfParameterName = null
 @param String csrfToken = null
@@ -36,10 +35,10 @@ content = @`
 
                         <div class="mb-3">
                             <label class="form-label">Uloge</label>
-                            @for (Role r : allRoles)
+                            @for (String r : allRoles)
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" id="role_${r.name()}" name="roles" value="${r.name()}" checked?="${form.getRoles() != null && form.getRoles().contains(r)}" />
-                                    <label class="form-check-label" for="role_${r.name()}">${hr.ja.st.view.Formatters.roleLabel(r)}</label>
+                                    <input class="form-check-input" type="checkbox" id="role_${r}" name="roles" value="${r}" checked?="${form.getRoles() != null && form.getRoles().contains(r)}" />
+                                    <label class="form-check-label" for="role_${r}">${hr.ja.st.view.Formatters.roleLabel(r)}</label>
                                 </div>
                             @endfor
                         </div>
