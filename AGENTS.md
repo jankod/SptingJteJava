@@ -43,3 +43,5 @@ Notes:
 - Public endpoints: `/login`, `/about`, `/static/**`, `/__dev/**`; others require auth.
 - Store secrets via environment/`application-*.properties`; never commit credentials.
 - Adjust date/time via `app.datetime.*` properties; see `DateTimeFormatConfig`.
+
+Odgovaraj mi na hrvatskom jeziku. Kod i komentare u kodu piši na engleskom jeziku.
