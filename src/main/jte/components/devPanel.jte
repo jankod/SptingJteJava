@@ -1,4 +1,4 @@
-@import hr.ja.st.dev.DebugInfo
+@import hr.ja.st.dev.support.DebugInfo
 
 @param DebugInfo debug
 
@@ -29,7 +29,7 @@
           <code class="me-2">${debug.controllerClass}#${debug.controllerMethod}()</code>
           @if (debug.controllerSourcePath != null)
             <a class="btn btn-xs btn-outline-primary" href="#" onclick="return __devOpen('${java.net.URLEncoder.encode(debug.controllerSourcePath, java.nio.charset.StandardCharsets.UTF_8)}');">Open</a>
-            <a class="btn btn-xs btn-outline-secondary" href="${hr.ja.st.dev.DevToolbarConfig.buildIdeUrl(debug.controllerSourcePath, debug.controllerSourceLine)}" title="IDE link">IDE</a>
+            <a class="btn btn-xs btn-outline-secondary" href="${hr.ja.st.dev.config.DevToolbarConfig.buildIdeUrl(debug.controllerSourcePath, debug.controllerSourceLine)}" title="IDE link">IDE</a>
           @endif
         </div>
       </div>
@@ -38,7 +38,7 @@
           <div class="text-secondary small">Required Roles</div>
           <div>
             @for(String r : debug.requiredRoles)
-              <span class="badge bg-blue-lt me-1">${hr.ja.st.view.Formatters.roleLabel(r)}<span class="ms-1 text-muted">${r}</span></span>
+              <span class="badge bg-blue-lt me-1">${hr.ja.st.common.view.Formatters.roleLabel(r)}<span class="ms-1 text-muted">${r}</span></span>
             @endfor
           </div>
         </div>
@@ -53,7 +53,7 @@
           @for (String f : debug.templateFiles)
             <div class="d-flex align-items-center gap-2 py-1">
               <a class="btn btn-xs btn-outline-primary" href="#" onclick="return __devOpen('${java.net.URLEncoder.encode(f, java.nio.charset.StandardCharsets.UTF_8)}');" title="Open in IDE">Open</a>
-              <a class="btn btn-xs btn-outline-secondary" href="${hr.ja.st.dev.DevToolbarConfig.buildIdeUrl(f, null)}" title="IDE link">IDE</a>
+              <a class="btn btn-xs btn-outline-secondary" href="${hr.ja.st.dev.config.DevToolbarConfig.buildIdeUrl(f, null)}" title="IDE link">IDE</a>
               <div class="small">${f}</div>
             </div>
           @endfor

@@ -1,8 +1,10 @@
 package hr.ja.st.security;
 
-import hr.ja.st.PageController;
-import hr.ja.st.user.UserController;
-import hr.ja.st.user.UserRepository;
+import hr.ja.st.security.web.LogoutController;
+import hr.ja.st.security.web.SecurityController;
+import hr.ja.st.user.repo.UserRepository;
+import hr.ja.st.user.web.UserController;
+import hr.ja.st.web.HomeController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,16 +13,14 @@ import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrlPattern;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = {PageController.class, SecurityController.class, LogoutController.class, UserController.class})
+@WebMvcTest(controllers = {HomeController.class, SecurityController.class, LogoutController.class, UserController.class})
 @Import(SecurityConfig.class)
 class WebSecurityTests {
 
@@ -28,9 +28,9 @@ class WebSecurityTests {
     MockMvc mvc;
 
     // Slice provides only selected controllers; provide mocks for their collaborators
-    @MockitoBean
+    @MockBean
     UserRepository userRepository;
-    @MockitoBean
+    @MockBean
     PasswordEncoder passwordEncoder;
 
     @Test

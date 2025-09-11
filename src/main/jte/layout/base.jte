@@ -47,8 +47,8 @@
     ${scripts}
 @endif
 
-@if (hr.ja.st.dev.DevToolbarConfig.ENABLED && hr.ja.st.dev.DebugContext.current() != null)
-    @template.components.devPanel(debug = hr.ja.st.dev.DebugContext.current())
+@if (hr.ja.st.dev.config.DevToolbarConfig.ENABLED && hr.ja.st.dev.support.DebugContext.current() != null)
+    @template.components.devPanel(debug = hr.ja.st.dev.support.DebugContext.current())
 @endif
 </body>
 </html>

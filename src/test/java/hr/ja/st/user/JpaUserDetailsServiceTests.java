@@ -1,5 +1,9 @@
 package hr.ja.st.user;
 
+import hr.ja.st.security.auth.JpaUserDetailsService;
+import hr.ja.st.user.domain.Roles;
+import hr.ja.st.user.domain.User;
+import hr.ja.st.user.repo.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,7 +28,7 @@ class JpaUserDetailsServiceTests {
                 .username("ana")
                 .password("ENC")
                 .enabled(false)
-                .roles(new HashSet<>(List.of(hr.ja.st.user.Roles.ADMIN, hr.ja.st.user.Roles.USER)))
+                .roles(new HashSet<>(List.of(Roles.USER, Roles.ADMIN)))
                 .build();
         when(repo.findByUsername("ana")).thenReturn(Optional.of(u));
 
@@ -33,7 +37,7 @@ class JpaUserDetailsServiceTests {
         assertThat(ud.getUsername()).isEqualTo("ana");
         assertThat(ud.getPassword()).isEqualTo("ENC");
         assertThat(ud.getAuthorities()).extracting("authority")
-                .containsExactlyInAnyOrder(hr.ja.st.user.Roles.ADMIN, hr.ja.st.user.Roles.USER);
+                .containsExactlyInAnyOrder(Roles.ADMIN, Roles.USER);
         assertThat(ud.isEnabled()).isFalse();
     }
 

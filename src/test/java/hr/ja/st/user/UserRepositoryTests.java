@@ -1,5 +1,8 @@
 package hr.ja.st.user;
 
+import hr.ja.st.user.domain.Roles;
+import hr.ja.st.user.domain.User;
+import hr.ja.st.user.repo.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +27,7 @@ class UserRepositoryTests {
                 .username("marko")
                 .password("x")
                 .enabled(true)
-                .roles(new java.util.HashSet<>(List.of(hr.ja.st.user.Roles.USER)))
+                .roles(new java.util.HashSet<>(List.of(Roles.USER)))
                 .build();
         userRepository.saveAndFlush(u);
 
@@ -35,9 +38,9 @@ class UserRepositoryTests {
     @DisplayName("unique username constraint enforced")
     void unique_username() {
         User a = User.builder().username("dup").password("x").enabled(true)
-                .roles(new java.util.HashSet<>(List.of(hr.ja.st.user.Roles.USER))).build();
+                .roles(new java.util.HashSet<>(List.of(Roles.USER))).build();
         User b = User.builder().username("dup").password("y").enabled(true)
-                .roles(new java.util.HashSet<>(List.of(hr.ja.st.user.Roles.USER))).build();
+                .roles(new java.util.HashSet<>(List.of(Roles.USER))).build();
         userRepository.saveAndFlush(a);
         assertThatThrownBy(() -> userRepository.saveAndFlush(b))
                 .isInstanceOf(DataIntegrityViolationException.class);
@@ -54,6 +57,6 @@ class UserRepositoryTests {
                 .build();
         User saved = userRepository.saveAndFlush(u);
         assertThat(saved.getCreatedAt()).isNotNull();
-        assertThat(saved.getRoles()).contains(hr.ja.st.user.Roles.USER);
+        assertThat(saved.getRoles()).contains(Roles.USER);
     }
 }

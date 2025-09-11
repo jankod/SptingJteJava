@@ -9,7 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import hr.ja.st.user.Roles;
+import hr.ja.st.user.domain.Roles;
 
 @Configuration
 @EnableWebSecurity

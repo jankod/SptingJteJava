@@ -1,5 +1,5 @@
-@import hr.ja.st.PageController
-@import hr.ja.st.user.Roles
+@import hr.ja.st.web.Routes
+@import hr.ja.st.user.domain.Roles
 
 @param String activePath
 @param String csrfParameterName = null
@@ -33,13 +33,13 @@
 
             @template.components.navItem(
             label = "Home",
-            currentPath = PageController.HOME,
+            currentPath = Routes.HOME,
             activePath = activePath,
             icon = @`@template.components.icons.home()`
             )
             @template.components.navItem(
             label = "O nama",
-            currentPath  = PageController.ABOUT,
+            currentPath  = Routes.ABOUT,
             activePath = activePath,
             icon = @`@template.components.icons.users()`
             )

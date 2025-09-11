@@ -1,11 +1,16 @@
 package hr.ja.st.user;
 
+import hr.ja.st.security.SecurityConfig;
+import hr.ja.st.user.domain.Roles;
+import hr.ja.st.user.domain.User;
+import hr.ja.st.user.repo.UserRepository;
+import hr.ja.st.user.web.UserController;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
+import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -16,14 +21,13 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.verify;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-
-import hr.ja.st.security.SecurityConfig;
 
 @WebMvcTest(UserController.class)
 @Import(SecurityConfig.class)
@@ -32,10 +36,10 @@ class UserControllerTests {
     @Autowired
     MockMvc mvc;
 
-    @MockitoBean
+    @MockBean
     UserRepository userRepository;
 
-    @MockitoBean
+    @MockBean
     PasswordEncoder passwordEncoder;
 
     @Test
@@ -45,7 +49,7 @@ class UserControllerTests {
         given(userRepository.findAll()).willReturn(List.of());
         mvc.perform(get("/users"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("pages/users.jte"))
+                .andExpect(view().name("pages/user/list.jte"))
                 .andExpect(model().attributeExists("users"));
     }
 
@@ -62,7 +66,7 @@ class UserControllerTests {
                         .param("enabled", "true")
                 )
                 .andExpect(status().isOk())
-                .andExpect(view().name("pages/user_new.jte"))
+                .andExpect(view().name("pages/user/new.jte"))
                 .andExpect(model().attributeExists("errors"));
         verify(userRepository, never()).save(any());
     }
@@ -80,7 +84,7 @@ class UserControllerTests {
                         .param("enabled", "true")
                 )
                 .andExpect(status().isOk())
-                .andExpect(view().name("pages/user_new.jte"))
+                .andExpect(view().name("pages/user/new.jte"))
                 .andExpect(model().attributeExists("errors"));
         verify(userRepository, never()).save(any());
     }
@@ -108,7 +112,7 @@ class UserControllerTests {
         User saved = captor.getValue();
         assertThat(saved.getUsername()).isEqualTo("ana");
         assertThat(saved.getPassword()).isEqualTo("ENCODED");
-        assertThat(saved.getRoles()).contains(hr.ja.st.user.Roles.USER);
+        assertThat(saved.getRoles()).contains(Roles.USER);
         assertThat(saved.isEnabled()).isTrue();
     }
 
@@ -116,12 +120,12 @@ class UserControllerTests {
     @WithMockUser(roles = "ADMIN")
     @DisplayName("GET /users/{id}/edit returns view with user")
     void editForm_ok() throws Exception {
-        User u = User.builder().id(5L).username("iva").enabled(true).roles(new java.util.HashSet<>(List.of(hr.ja.st.user.Roles.USER))).build();
+        User u = User.builder().id(5L).username("iva").enabled(true).roles(new java.util.HashSet<>(List.of(Roles.USER))).build();
         given(userRepository.findById(5L)).willReturn(Optional.of(u));
 
         mvc.perform(get("/users/5/edit"))
                 .andExpect(status().isOk())
-                .andExpect(view().name("pages/user_edit.jte"))
+                .andExpect(view().name("pages/user/edit.jte"))
                 .andExpect(model().attributeExists("user"));
     }
 
@@ -130,7 +134,7 @@ class UserControllerTests {
     @DisplayName("POST /users/{id}/edit updates fields and redirects")
     void updateUser_ok() throws Exception {
         User u = User.builder().id(2L).username("old").enabled(false)
-                .roles(new java.util.HashSet<>(List.of(hr.ja.st.user.Roles.USER)))
+                .roles(new java.util.HashSet<>(List.of(Roles.USER)))
                 .password("OLD")
                 .build();
         given(userRepository.findById(2L)).willReturn(Optional.of(u));
@@ -140,7 +144,7 @@ class UserControllerTests {
                         .with(SecurityMockMvcRequestPostProcessors.csrf())
                         .param("username", "new")
                         .param("enabled", "true")
-                        .param("roles", "ROLE_ADMIN")
+                        .param("roles", Roles.USER)
                         .param("newPassword", "newpass")
                 )
                 .andExpect(status().is3xxRedirection())
@@ -151,7 +155,7 @@ class UserControllerTests {
         User saved = captor.getValue();
         assertThat(saved.getUsername()).isEqualTo("new");
         assertThat(saved.isEnabled()).isTrue();
-        assertThat(saved.getRoles()).containsExactlyInAnyOrder(hr.ja.st.user.Roles.ADMIN);
+        assertThat(saved.getRoles()).containsExactlyInAnyOrder(Roles.USER);
         assertThat(saved.getPassword()).isEqualTo("ENC_NEW");
     }
 
