@@ -1,16 +1,18 @@
 package hr.ja.st.user;
 
-import hr.ja.st.security.SecurityConfig;
 import hr.ja.st.user.domain.Roles;
 import hr.ja.st.user.domain.User;
 import hr.ja.st.user.repo.UserRepository;
 import hr.ja.st.user.web.UserController;
 import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.Mockito;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
@@ -30,17 +32,22 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @WebMvcTest(UserController.class)
-@Import(SecurityConfig.class)
+@Import({TestConfig.class})
 class UserControllerTests {
 
     @Autowired
     MockMvc mvc;
 
-    @MockBean
+    @Autowired
     UserRepository userRepository;
 
-    @MockBean
+    @Autowired
     PasswordEncoder passwordEncoder;
+
+    @BeforeEach
+    void resetMocks() {
+        Mockito.reset(userRepository, passwordEncoder);
+    }
 
     @Test
     @WithMockUser(roles = "ADMIN")
@@ -167,5 +174,18 @@ class UserControllerTests {
                 .andExpect(status().is3xxRedirection())
                 .andExpect(redirectedUrl("/users"));
         verify(userRepository).deleteById(9L);
+    }
+}
+
+@TestConfiguration
+class TestConfig {
+    @org.springframework.context.annotation.Bean
+    UserRepository userRepository() {
+        return Mockito.mock(UserRepository.class);
+    }
+
+    @org.springframework.context.annotation.Bean
+    PasswordEncoder passwordEncoder() {
+        return Mockito.mock(PasswordEncoder.class);
     }
 }

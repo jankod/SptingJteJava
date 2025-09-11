@@ -22,4 +22,10 @@ public class SecurityController {
         }
         return "pages/security/login.jte";
     }
+
+        // GET /logout -> stranica koja automatski šalje POST /logout (s CSRF)
+    @GetMapping("/logout")
+    public String confirmOrAutoLogout() {
+        return "pages/security/logout_redirect.jte";
+    }
 }

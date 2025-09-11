@@ -1,6 +1,5 @@
 package hr.ja.st.security;
 
-import hr.ja.st.security.web.LogoutController;
 import hr.ja.st.security.web.SecurityController;
 import hr.ja.st.user.repo.UserRepository;
 import hr.ja.st.user.web.UserController;
@@ -9,28 +8,29 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.mockito.Mockito;
+import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-@WebMvcTest(controllers = {HomeController.class, SecurityController.class, LogoutController.class, UserController.class})
-@Import(SecurityConfig.class)
+@WebMvcTest(controllers = {HomeController.class, SecurityController.class, UserController.class})
+@Import({SecurityConfig.class, TestConfig.class})
 class WebSecurityTests {
 
     @Autowired
     MockMvc mvc;
 
-    // Slice provides only selected controllers; provide mocks for their collaborators
-    @MockBean
+    // Slice provides only selected controllers; supply collaborators as mocked beans
+    @Autowired
     UserRepository userRepository;
-    @MockBean
+    @Autowired
     PasswordEncoder passwordEncoder;
 
     @Test
@@ -73,5 +73,13 @@ class WebSecurityTests {
         mvc.perform(post("/logout").with(SecurityMockMvcRequestPostProcessors.csrf()))
               .andExpect(status().is3xxRedirection())
               .andExpect(redirectedUrl("/login?logout"));
+    }
+}
+
+@TestConfiguration
+class TestConfig {
+    @org.springframework.context.annotation.Bean
+    UserRepository userRepository() {
+        return Mockito.mock(UserRepository.class);
     }
 }

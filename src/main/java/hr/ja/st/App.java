@@ -12,7 +12,6 @@ public class App {
     public static void main(String[] args) {
         //SpringApplication.run(SptingJteJavaApplication.class, args);
 
-
         SpringApplication app = new SpringApplication(App.class);
         app.setApplicationStartup(new BufferingApplicationStartup(2048));
         app.run(args);
