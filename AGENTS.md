@@ -44,4 +44,15 @@ Notes:
 - Store secrets via environment/`application-*.properties`; never commit credentials.
 - Adjust date/time via `app.datetime.*` properties; see `DateTimeFormatConfig`.
 
+## UI & Template Changes
+- For JTE updates, include before/after screenshots for `/about` and authenticated home (`/`, login via `admin/admin`).
+- Verify returned view names match templates (e.g., `pages/home/index.jte`).
+- Keep components in `src/main/jte/components`; prefer reusable layouts under `layout/`.
+
+## Testing Examples
+- MVC slice: `@WebMvcTest(HomeController.class)` for controller routes; mock collaborators.
+- Security: use `@WithMockUser(roles = "USER")` or `roles = "ADMIN"` for protected endpoints.
+- Data layer: `@DataJpaTest` for repositories (H2 runtime).
+- Example commands: run unit tests `./mvnw -q -Dtest=*Tests test`; single test `./mvnw -Dtest=UserControllerTests test`.
+
 Odgovaraj mi na hrvatskom jeziku. Kod i komentare u kodu piši na engleskom jeziku.
