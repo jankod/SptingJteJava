@@ -61,7 +61,6 @@
       </div>
     </div>
   </div>
-  <div class="text-end small text-secondary mt-1">Only visible in dev</div>
   <script>
     function __devOpen(encodedPath){
       fetch('/__dev/open?path=' + encodedPath, {method:'GET'}).catch(()=>{});
