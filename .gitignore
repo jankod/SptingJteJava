@@ -34,3 +34,4 @@ build/
 
 ### JTE ###
 /jte-classes/
+/src/main/resources/saml/
