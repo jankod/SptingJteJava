@@ -44,6 +44,13 @@
             icon = @`@template.components.icons.users()`
             )
 
+            @template.components.navItem(
+            label = "Projects",
+            currentPath  = hr.ja.st.web.Routes.PROJECTS,
+            activePath = activePath,
+            icon = @`@template.components.icons.users()`
+            )
+
             @if (org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication() != null && org.springframework.security.core.context.SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream().anyMatch(a -> a.getAuthority().equals(Roles.ADMIN)))
                 @template.components.navItem(
                 label = "Users",

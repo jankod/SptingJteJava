@@ -41,4 +41,9 @@ public class User {
         if (createdAt == null) createdAt = Instant.now();
         if (roles == null || roles.isEmpty()) roles = new HashSet<>(java.util.List.of(hr.ja.st.user.domain.Roles.USER));
     }
+
+    public User(Long id, String username) {
+        this.id = id;
+        this.username = username;
+    }
 }

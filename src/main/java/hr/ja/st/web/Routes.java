@@ -5,5 +5,5 @@ public final class Routes {
 
     public static final String HOME = "/";
     public static final String ABOUT = "/about";
+    public static final String PROJECTS = "/projects";
 }
-

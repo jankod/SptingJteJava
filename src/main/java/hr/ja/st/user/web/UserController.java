@@ -1,5 +1,8 @@
 package hr.ja.st.user.web;
 
+import hr.ja.st.user.domain.User;
+import hr.ja.st.user.repo.UserRepository;
+import hr.ja.st.user.web.dto.NewUserForm;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
@@ -10,15 +13,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import hr.ja.st.user.repo.UserRepository;
-import hr.ja.st.user.domain.User;
-import hr.ja.st.user.domain.Roles;
-import hr.ja.st.user.web.dto.NewUserForm;
+import static hr.ja.st.user.domain.Roles.*;
 
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/users")
-@Secured(Roles.ADMIN)
+@Secured(ADMIN)
 public class UserController {
 
     private final UserRepository userRepository;
@@ -34,9 +34,9 @@ public class UserController {
     @GetMapping("/new")
     public String newUserForm(Model model) {
         NewUserForm form = new NewUserForm();
-        form.getRoles().add(Roles.USER);
+        form.getRoles().add(USER);
         model.addAttribute("form", form);
-        model.addAttribute("allRoles", hr.ja.st.user.domain.Roles.ALL.toArray(new String[0]));
+        model.addAttribute("allRoles", ALL_ROLE.toArray(new String[ALL_ROLE.size()]));
         return "pages/user/new.jte";
     }
 
@@ -57,7 +57,7 @@ public class UserController {
         }
         // Roles default
         if (form.getRoles() == null || form.getRoles().isEmpty()) {
-            form.add(Roles.USER);
+            form.add(USER);
         }
 
         if (binding.hasErrors()) {
@@ -66,7 +66,7 @@ public class UserController {
                 errors.add(e.getDefaultMessage());
             }
             model.addAttribute("errors", errors);
-            model.addAttribute("allRoles", hr.ja.st.user.domain.Roles.ALL.toArray(new String[0]));
+            model.addAttribute("allRoles", ALL_ROLE.toArray(new String[ALL_ROLE.size()]));
             return "pages/user/new.jte";
         }
 
@@ -84,7 +84,7 @@ public class UserController {
     public String editForm(@PathVariable Long id, Model model) {
         User user = userRepository.findById(id).orElseThrow();
         model.addAttribute("user", user);
-        model.addAttribute("allRoles", hr.ja.st.user.domain.Roles.ALL.toArray(new String[0]));
+        model.addAttribute("allRoles", ALL_ROLE.toArray(new String[0]));
         return "pages/user/edit.jte";
     }
 
@@ -99,7 +99,7 @@ public class UserController {
         user.setEnabled(enabled);
         java.util.Set<String> newRoles = new java.util.HashSet<>();
         if (roles != null) newRoles.addAll(roles);
-        if (newRoles.isEmpty()) newRoles.add(Roles.USER);
+        if (newRoles.isEmpty()) newRoles.add(USER);
         user.setRoles(newRoles);
         if (newPassword != null && !newPassword.isBlank()) {
             user.setPassword(passwordEncoder.encode(newPassword));

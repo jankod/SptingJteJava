@@ -56,3 +56,17 @@ Notes:
 - Example commands: run unit tests `./mvnw -q -Dtest=*Tests test`; single test `./mvnw -Dtest=UserControllerTests test`.
 
 Odgovaraj mi na hrvatskom jeziku. Kod i komentare u kodu piši na engleskom jeziku.
+
+▌MockBean' is deprecated.
+Korsiti @MockkBean iz najnovlje biblioteke
+Koristi najnovlji springboot, JTE i druge biblioteke
+Koristi Java 24
+Koristi Lombok
+Koristi Junit 5
+Koristi Maven
+Koristi Spring Security
+Koristi Spring Data JPA
+Koristi H2 i postgresql bazu podataka
+Koristi Spring Boot Test
+Koristi Spring Web MVC
+Koristi Spring Boot DevTools

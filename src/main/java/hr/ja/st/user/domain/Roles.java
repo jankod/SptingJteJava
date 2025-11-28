@@ -8,7 +8,7 @@ public final class Roles {
     public static final String USER = "ROLE_USER";
     public static final String ADMIN = "ROLE_ADMIN";
 
-    public static final List<String> ALL = List.of(USER, ADMIN);
+    public static final List<String> ALL_ROLE = List.of(USER, ADMIN);
 
     public static String label(String role) {
         if (role == null) return "";
