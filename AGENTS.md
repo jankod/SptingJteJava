@@ -59,8 +59,8 @@ Odgovaraj mi na hrvatskom jeziku. Kod i komentare u kodu piši na engleskom jezi
 
 ▌MockBean' is deprecated.
 Korsiti @MockkBean iz najnovlje biblioteke
-Koristi najnovlji springboot, JTE i druge biblioteke
-Koristi Java 24
+Koristi springboot 4.0.0, JTE i druge biblioteke
+Koristi Java 25
 Koristi Lombok
 Koristi Junit 5
 Koristi Maven
@@ -69,4 +69,3 @@ Koristi Spring Data JPA
 Koristi H2 i postgresql bazu podataka
 Koristi Spring Boot Test
 Koristi Spring Web MVC
-Koristi Spring Boot DevTools

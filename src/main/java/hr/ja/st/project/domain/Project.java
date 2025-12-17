@@ -52,8 +52,24 @@ public class Project {
     }
 
     public void setOwner(User user) {
-        // remove existing owner
-        members.removeIf(pm -> pm.getRole() == ProjectRole.OWNER);
+        if (user == null) {
+            return;
+        }
+
+        // remove any other owners
+        members.removeIf(pm -> pm.getRole() == ProjectRole.OWNER && !Objects.equals(pm.getUser().getId(), user.getId()));
+
+        // reuse existing membership if present to avoid unique constraint issues
+        ProjectMember existing = members.stream()
+                .filter(pm -> Objects.equals(pm.getUser().getId(), user.getId()))
+                .findFirst()
+                .orElse(null);
+
+        if (existing != null) {
+            existing.setRole(ProjectRole.OWNER);
+            return;
+        }
+
         addMember(user, ProjectRole.OWNER);
     }
 
