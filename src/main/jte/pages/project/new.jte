@@ -14,7 +14,6 @@ content = @`
         <input type="hidden" name="${csrfParameterName}" value="${csrfToken}"/>
         @for (hr.ja.st.form.meta.FieldMeta f : meta.fields)
             @template.components.form.field(f=f, br= br, value= values.get(f.name))
-
         @endfor
         <div class="mt-3">
             <button type="submit" class="btn btn-primary">Save</button>
