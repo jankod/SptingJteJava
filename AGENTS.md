@@ -61,6 +61,7 @@ Odgovaraj mi na hrvatskom jeziku. Kod i komentare u kodu piši na engleskom jezi
 Korsiti @MockkBean iz najnovlje biblioteke
 Koristi springboot 4.0.0, JTE i druge biblioteke
 Koristi Java 25
+Koristi JTE template https://jte.gg/syntax/#variables
 Koristi Lombok
 Koristi Junit 5
 Koristi Maven

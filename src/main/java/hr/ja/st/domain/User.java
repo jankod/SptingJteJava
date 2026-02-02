@@ -1,4 +1,4 @@
-package hr.ja.st.user.domain;
+package hr.ja.st.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -39,7 +39,7 @@ public class User {
     @PrePersist
     void prePersist() {
         if (createdAt == null) createdAt = Instant.now();
-        if (roles == null || roles.isEmpty()) roles = new HashSet<>(java.util.List.of(hr.ja.st.user.domain.Roles.USER));
+        if (roles == null || roles.isEmpty()) roles = new HashSet<>(java.util.List.of(Roles.USER));
     }
 
     public User(Long id, String username) {

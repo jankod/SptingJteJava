@@ -5,8 +5,6 @@
 @param gg.jte.Content content
 @param Content headExtra = null
 @param Content scripts = null
-@param String csrfParameterName = null
-@param String csrfToken = null
 @param boolean showNavbar = true
 
 
@@ -29,7 +27,7 @@
 <body class="bg-light">
 
 @if (showNavbar)
-    @template.components.navbar(activePath = activePathPage, csrfParameterName = csrfParameterName, csrfToken = csrfToken)
+    @template.components.navbar(activePath = activePathPage)
 @endif
 
 <main class="container py-4">

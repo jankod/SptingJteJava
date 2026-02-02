@@ -1,9 +1,9 @@
 package hr.ja.st.user;
 
+import hr.ja.st.domain.Roles;
+import hr.ja.st.domain.User;
+import hr.ja.st.repo.UserRepository;
 import hr.ja.st.security.auth.JpaUserDetailsService;
-import hr.ja.st.user.domain.Roles;
-import hr.ja.st.user.domain.User;
-import hr.ja.st.user.repo.UserRepository;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;

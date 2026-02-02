@@ -1,18 +1,17 @@
 package hr.ja.st.user;
 
-import hr.ja.st.user.domain.Roles;
-import hr.ja.st.user.domain.User;
-import hr.ja.st.user.repo.UserRepository;
-import hr.ja.st.user.web.UserController;
-import org.junit.jupiter.api.DisplayName;
+import hr.ja.st.controler.UserController;
+import hr.ja.st.domain.Roles;
+import hr.ja.st.domain.User;
+import hr.ja.st.repo.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
-import org.mockito.Mockito;
 import org.springframework.boot.test.context.TestConfiguration;
+import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;

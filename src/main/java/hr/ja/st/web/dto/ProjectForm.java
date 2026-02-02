@@ -1,10 +1,9 @@
-package hr.ja.st.project.web.dto;
+package hr.ja.st.web.dto;
 
 import hr.ja.st.form.FieldType;
 import hr.ja.st.form.annotations.UiField;
 import hr.ja.st.form.annotations.UiForm;
 import hr.ja.st.form.annotations.UiOptions;
-import hr.ja.st.project.web.options.UserOptions;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;

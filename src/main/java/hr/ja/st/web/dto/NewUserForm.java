@@ -1,4 +1,4 @@
-package hr.ja.st.user.web.dto;
+package hr.ja.st.web.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

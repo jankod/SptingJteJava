@@ -1,5 +1,7 @@
 package hr.ja.st.security.auth;
 
+import hr.ja.st.domain.User;
+import hr.ja.st.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -10,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 import java.util.stream.Collectors;
-
-import hr.ja.st.user.domain.User;
-import hr.ja.st.user.repo.UserRepository;
 
 @Service
 @RequiredArgsConstructor

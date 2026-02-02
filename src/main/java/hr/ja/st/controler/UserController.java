@@ -1,8 +1,8 @@
-package hr.ja.st.user.web;
+package hr.ja.st.controler;
 
-import hr.ja.st.user.domain.User;
-import hr.ja.st.user.repo.UserRepository;
-import hr.ja.st.user.web.dto.NewUserForm;
+import hr.ja.st.domain.User;
+import hr.ja.st.repo.UserRepository;
+import hr.ja.st.web.dto.NewUserForm;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.annotation.Secured;
@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static hr.ja.st.user.domain.Roles.*;
+import static hr.ja.st.domain.Roles.*;
+
 
 @Controller
 @RequiredArgsConstructor

@@ -1,4 +1,4 @@
-package hr.ja.st.user.domain;
+package hr.ja.st.domain;
 
 import java.util.List;
 

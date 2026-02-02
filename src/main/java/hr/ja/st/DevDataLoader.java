@@ -1,8 +1,8 @@
-package hr.ja.st.user;
+package hr.ja.st;
 
-import hr.ja.st.user.domain.Roles;
-import hr.ja.st.user.domain.User;
-import hr.ja.st.user.repo.UserRepository;
+import hr.ja.st.domain.Roles;
+import hr.ja.st.domain.User;
+import hr.ja.st.repo.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;

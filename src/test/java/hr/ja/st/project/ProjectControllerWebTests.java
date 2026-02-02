@@ -1,19 +1,18 @@
 package hr.ja.st.project;
 
-import hr.ja.st.project.domain.Project;
-import hr.ja.st.project.domain.ProjectRole;
-import hr.ja.st.project.repo.ProjectRepository;
-import hr.ja.st.project.web.ProjectController;
+import hr.ja.st.controler.ProjectController;
+import hr.ja.st.domain.Project;
+import hr.ja.st.domain.User;
+import hr.ja.st.repo.ProjectRepository;
+import hr.ja.st.repo.UserRepository;
 import hr.ja.st.security.SecurityConfig;
-import hr.ja.st.user.domain.User;
-import hr.ja.st.user.repo.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.boot.webmvc.test.autoconfigure.WebMvcTest;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Import;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
@@ -26,7 +25,6 @@ import static org.springframework.security.test.web.servlet.request.SecurityMock
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.hamcrest.Matchers.containsString;
 
 @WebMvcTest(controllers = ProjectController.class)
 @Import(SecurityConfig.class)
@@ -35,7 +33,8 @@ class ProjectControllerWebTests {
     @Autowired MockMvc mockMvc;
 
     @MockitoBean ProjectRepository projectRepository;
-    @MockitoBean UserRepository userRepository;
+    @MockitoBean
+    UserRepository userRepository;
     @MockitoBean MessageSource messageSource;
 
     @Test

@@ -1,12 +1,8 @@
 @param boolean error
 @param boolean logout
-@param String csrfParameterName
-@param String csrfToken
 
 @template.layout.base(title = "Prijava",
 activePathPage = hr.ja.st.web.Routes.HOME,
-csrfParameterName = csrfParameterName,
-csrfToken = csrfToken,
 showNavbar = false,
 content = @`
     <div class="row justify-content-center">

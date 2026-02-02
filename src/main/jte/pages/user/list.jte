@@ -1,20 +1,16 @@
 @import java.util.List
-@import hr.ja.st.user.domain.User
+@import hr.ja.st.domain.User
 
 @param List<User> users
-@param String csrfParameterName = null
-@param String csrfToken = null
 
 @template.layout.base(title = "Users",
 activePathPage = "/users",
-csrfParameterName = csrfParameterName,
-csrfToken = csrfToken,
 content = @`
     <div class="row">
         <div class="col-12">
             <div class="d-flex justify-content-between align-items-center mb-3">
                 <h1 class="m-0">Korisnici</h1>
-                <a class="btn btn-primary" href="/users/new">Dodaj korisnika</a>
+                <a class="btn btn-primary" href="/users/new">Add users</a>
             </div>
             <div class="card">
                 <div class="table-responsive">
@@ -26,7 +22,7 @@ content = @`
                             <th>Uloge</th>
                             <th>Aktivan</th>
                             <th>Kreiran</th>
-                            <th class="w-1">Akcije</th>
+                            <th class="w-1"></th>
                         </tr>
                         </thead>
                         <tbody>

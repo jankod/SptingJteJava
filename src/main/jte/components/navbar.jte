@@ -1,9 +1,9 @@
+@import hr.ja.st.domain.Roles
 @import hr.ja.st.web.Routes
-@import hr.ja.st.user.domain.Roles
 
 @param String activePath
-@param String csrfParameterName = null
-@param String csrfToken = null
+#@param String csrfParameterName = null
+#@param String csrfToken = null
 
 <header class="navbar navbar-expand-md d-print-none">
     <div class="container-xl">
@@ -94,7 +94,8 @@
                         <div class="dropdown-divider"></div>
                         <a href="#" class="dropdown-item">Settings</a>
                         <form method="post" action="/logout" class="px-3 pt-1 pb-1">
-                            <input type="hidden" name="${csrfParameterName}" value="${csrfToken}"/>
+<%--                            <input type="hidden" name="${csrfParameterName}" value="${csrfToken}"/>--%>
+                             @template.components.csrfHidden()
                             <button type="submit" class="dropdown-item p-0">Logout</button>
                         </form>
                     </div>

@@ -2,7 +2,7 @@ package hr.ja.st.view;
 
 import hr.ja.st.common.view.Formatters;
 import hr.ja.st.config.DateTimeFormatConfig;
-import hr.ja.st.user.domain.Roles;
+import hr.ja.st.domain.Roles;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

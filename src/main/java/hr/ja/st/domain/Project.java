@@ -1,6 +1,5 @@
-package hr.ja.st.project.domain;
+package hr.ja.st.domain;
 
-import hr.ja.st.user.domain.User;
 import jakarta.persistence.*;
 import lombok.*;
 

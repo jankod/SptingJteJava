@@ -1,6 +1,6 @@
-package hr.ja.st.project.repo;
+package hr.ja.st.repo;
 
-import hr.ja.st.project.domain.Project;
+import hr.ja.st.domain.Project;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProjectRepository extends JpaRepository<Project, Long> {

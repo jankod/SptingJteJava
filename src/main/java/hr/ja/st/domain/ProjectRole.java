@@ -1,4 +1,4 @@
-package hr.ja.st.project.domain;
+package hr.ja.st.domain;
 
 public enum ProjectRole {
     OWNER,

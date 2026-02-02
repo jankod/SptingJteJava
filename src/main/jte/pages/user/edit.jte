@@ -1,4 +1,4 @@
-@import hr.ja.st.user.domain.User
+@import hr.ja.st.domain.User
 
 @param User user
 @param String[] allRoles
